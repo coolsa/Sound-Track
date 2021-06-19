@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "jukebox_mod",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -19,7 +19,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "xyz.coolsa.jukebox.ExampleMod"
+    ],
+    "client": [
+      "xyz.coolsa.jukebox.ExampleMod"
     ]
   },
   "mixins": [
