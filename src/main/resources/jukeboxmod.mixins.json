@@ -1,0 +1,14 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "xyz.coolsa.jukebox.mixin",
+	"compatibilityLevel": "JAVA_16",
+	"mixins": [],
+	"client": [
+		"SoundManagerAccessor",
+		"SoundSystemAccessor"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

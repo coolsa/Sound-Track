@@ -22,27 +22,20 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ExampleMod implements ModInitializer, ClientModInitializer {
-	private static final Identifier id = new Identifier("jukeboxmod", "jukebox_minecart");
-	public static final Item JUKEBOX_MINECART_ITEM = new JukeboxMinecartItem(
-			new Item.Settings().maxCount(1).group(ItemGroup.TRANSPORTATION));
-	public static final EntityType<JukeboxMinecartEntity> JUKEBOX_MINECART_ENTITY =
-//			FabricEntityTypeBuilder
-//			.<JukeboxMinecartEntity>create().entityFactory(JukeboxMinecartEntity::new).spawnGroup(SpawnGroup.MISC)
-//			.build();
-//			Registry.register(Registry.ENTITY_TYPE, id,
-			EntityType.Builder.<JukeboxMinecartEntity>create(JukeboxMinecartEntity::new, SpawnGroup.MISC)
-					.setDimensions(0.98f, 0.7f).maxTrackingRange(8).build(id.toString());
-
+	private static ClientPacketHandler handler;
 	@Override
 	public void onInitialize() {
-		Registry.register(Registry.ITEM, new Identifier("jukeboxmod", "jukebox_minecart"), JUKEBOX_MINECART_ITEM);
+		Registry.register(Registry.ITEM, JukeboxConstants.JUKEBOX_MINECART_ITEM_ID, JukeboxConstants.JUKEBOX_MINECART_ITEM);
 		System.out.println("Hello Fabric world!");
+		Registry.register(Registry.ENTITY_TYPE, JukeboxConstants.JUKEBOX_MINECART_ENTITY_ID, JukeboxConstants.JUKEBOX_MINECART_ENTITY);
+//		FabricDefaultAttributeRegistry.register(JUKEBOX_MINECART_ENTITY, );
 	}
 
 	@Override
 	public void onInitializeClient() {
-		EntityRendererRegistry.INSTANCE.register(JUKEBOX_MINECART_ENTITY,
+		EntityRendererRegistry.INSTANCE.register(JukeboxConstants.JUKEBOX_MINECART_ENTITY,
 				(context) -> new MinecartEntityRenderer<JukeboxMinecartEntity>(context,
 						EntityModelLayers.FURNACE_MINECART));
+		handler = new ClientPacketHandler();
 	}
 }
