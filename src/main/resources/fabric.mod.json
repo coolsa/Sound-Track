@@ -14,7 +14,7 @@
   },
 
   "license": "GPL v3.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/jukeboxmod/icon.png",
 
   "environment": "*",
   "entrypoints": {

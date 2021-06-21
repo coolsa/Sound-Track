@@ -34,4 +34,29 @@ public class JukeboxConstants {
 	public static final EntityType<JukeboxMinecartEntity> JUKEBOX_MINECART_ENTITY = EntityType.Builder
 			.<JukeboxMinecartEntity>create(JukeboxMinecartEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.7f)
 			.maxTrackingRange(8).build(JUKEBOX_MINECART_ENTITY_ID.toString());
+	
+	
+	/**
+	 * Noteblock minecart packet identifier.
+	 */
+	public static final Identifier NOTEBLOCK_MINECART_PLAY = new Identifier(MOD_NAME, "noteblock_minecart_play");
+	/**
+	 * The ID of the noteblock minecart item.
+	 */
+	public static final Identifier NOTEBLOCK_MINECART_ITEM_ID = new Identifier(MOD_NAME, "noteblock_minecart");
+	/**
+	 * The ID of the noteblock minecart entity.
+	 */
+	public static final Identifier NOTEBLOCK_MINECART_ENTITY_ID = new Identifier(MOD_NAME, "noteblock_minecart");
+	/**
+	 * The actual noteblock minecart item.
+	 */
+	public static final Item NOTEBLOCK_MINECART_ITEM = new NoteblockMinecartItem(
+			new Item.Settings().maxCount(1).group(ItemGroup.TRANSPORTATION));
+	/**
+	 * The actual noteblock minecart entity.
+	 */
+	public static final EntityType<NoteblockMinecartEntity> NOTEBLOCK_MINECART_ENTITY = EntityType.Builder
+			.<NoteblockMinecartEntity>create(NoteblockMinecartEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.7f)
+			.maxTrackingRange(8).build(NOTEBLOCK_MINECART_ENTITY_ID.toString());
 }

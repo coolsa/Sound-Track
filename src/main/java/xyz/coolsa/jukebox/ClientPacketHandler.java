@@ -18,8 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.MusicDiscItem;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.sound.SoundCategory;
-import xyz.coolsa.jukebox.mixin.SoundManagerAccessor;
-import xyz.coolsa.jukebox.mixin.SoundSystemAccessor;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.block.enums.Instrument;
 
 public class ClientPacketHandler {
 	public Map<Entity, SoundInstance> playingSongs;
@@ -29,6 +29,10 @@ public class ClientPacketHandler {
 		ClientPlayNetworking.registerGlobalReceiver(JukeboxConstants.JUKEBOX_MINECART_PLAY,
 				(client, handler, buf, responseSender) -> {
 					this.jukeboxMinecartPlayUpdate(client, handler, buf, responseSender);
+				});
+		ClientPlayNetworking.registerGlobalReceiver(JukeboxConstants.NOTEBLOCK_MINECART_PLAY,
+				(client, handler, buf, responseSender) -> {
+					this.noteblockMinecartPlayUpdate(client, handler, buf, responseSender);
 				});
 	}
 
@@ -44,7 +48,6 @@ public class ClientPacketHandler {
 			PacketSender responseSender) {
 		int entityId = buf.readInt();
 		ItemStack record = buf.readItemStack();
-		System.out.println(entityId);
 		client.execute(() -> {
 			boolean isJukeboxMinecart = client.world.getEntityById(entityId) instanceof JukeboxMinecartEntity;
 			if (!isJukeboxMinecart) {
@@ -53,21 +56,52 @@ public class ClientPacketHandler {
 			JukeboxMinecartEntity entity = (JukeboxMinecartEntity) client.world.getEntityById(entityId);
 			SoundInstance instance = this.playingSongs.get(entity);
 //			System.out.println((SoundManagerAccessor)MinecraftClient.getInstance().getSoundManager());
-			SoundManager soundSystem = MinecraftClient
-					.getInstance().getSoundManager();
-			if(instance != null) {
+			SoundManager soundSystem = MinecraftClient.getInstance().getSoundManager();
+			if (instance != null) {
 				soundSystem.stop(instance);
 				this.playingSongs.remove(instance);
 			}
 			if (record.getItem() instanceof MusicDiscItem) {
 				MusicDiscItem recordItem = (MusicDiscItem) record.getItem();
-				EntityTrackingSoundInstance newInstance = new EntityTrackingSoundInstance(recordItem.getSound(), SoundCategory.RECORDS,
-						1.0f, 1.0f, entity);
+				instance = new EntityTrackingSoundInstance(recordItem.getSound(),
+						SoundCategory.RECORDS, 4.0f, 1.0f, entity);
 
-				System.out.println(newInstance);
-				soundSystem.play(newInstance);
-				this.playingSongs.put(entity, newInstance);
+//				System.out.println(newInstance);
+				this.playingSongs.put(entity, instance);
+				soundSystem.play(instance);
 			}
+			// do stuff here. I will likely need to use the code I made for OnDeck,
+			// regarding the custom sound events.
+		});
+	}
+
+	/**
+	 * Plays a noteblock from a Noteblock Minecart.
+	 * 
+	 * @param client
+	 * @param handler
+	 * @param buf
+	 * @param responseSender
+	 */
+	private void noteblockMinecartPlayUpdate(MinecraftClient client, ClientPlayNetworkHandler handler,
+			PacketByteBuf buf, PacketSender responseSender) {
+		int entityId = buf.readInt();
+		BlockPos pos = buf.readBlockPos();
+		Integer note = buf.readInt();
+		client.execute(() -> {
+			if (!(client.world.getEntityById(entityId) instanceof NoteblockMinecartEntity)) {
+				return;
+			}
+			NoteblockMinecartEntity entity = (NoteblockMinecartEntity) client.world.getEntityById(entityId);
+			Instrument.fromBlockState(entity.world.getBlockState(pos));
+//			System.out.println((SoundManagerAccessor)MinecraftClient.getInstance().getSoundManager());
+			SoundManager soundSystem = MinecraftClient.getInstance().getSoundManager();
+			EntityTrackingSoundInstance noteInstance = new EntityTrackingSoundInstance(
+					Instrument.fromBlockState(entity.world.getBlockState(pos)).getSound(), SoundCategory.RECORDS, 3.0f,
+					(float) Math.pow(2.0, (double)(note - 12) / 12.0), entity);
+
+//			System.out.println(newInstance);
+			soundSystem.play(noteInstance);
 			// do stuff here. I will likely need to use the code I made for OnDeck,
 			// regarding the custom sound events.
 		});

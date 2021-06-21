@@ -23,11 +23,19 @@ import net.minecraft.util.registry.Registry;
 
 public class ExampleMod implements ModInitializer, ClientModInitializer {
 	private static ClientPacketHandler handler;
+
 	@Override
 	public void onInitialize() {
-		Registry.register(Registry.ITEM, JukeboxConstants.JUKEBOX_MINECART_ITEM_ID, JukeboxConstants.JUKEBOX_MINECART_ITEM);
+		Registry.register(Registry.ITEM, JukeboxConstants.JUKEBOX_MINECART_ITEM_ID,
+				JukeboxConstants.JUKEBOX_MINECART_ITEM);
 		System.out.println("Hello Fabric world!");
-		Registry.register(Registry.ENTITY_TYPE, JukeboxConstants.JUKEBOX_MINECART_ENTITY_ID, JukeboxConstants.JUKEBOX_MINECART_ENTITY);
+		Registry.register(Registry.ENTITY_TYPE, JukeboxConstants.JUKEBOX_MINECART_ENTITY_ID,
+				JukeboxConstants.JUKEBOX_MINECART_ENTITY);
+		Registry.register(Registry.ITEM, JukeboxConstants.NOTEBLOCK_MINECART_ITEM_ID,
+				JukeboxConstants.NOTEBLOCK_MINECART_ITEM);
+		System.out.println("Hello Fabric world!");
+		Registry.register(Registry.ENTITY_TYPE, JukeboxConstants.NOTEBLOCK_MINECART_ENTITY_ID,
+				JukeboxConstants.NOTEBLOCK_MINECART_ENTITY);
 //		FabricDefaultAttributeRegistry.register(JUKEBOX_MINECART_ENTITY, );
 	}
 
@@ -35,6 +43,9 @@ public class ExampleMod implements ModInitializer, ClientModInitializer {
 	public void onInitializeClient() {
 		EntityRendererRegistry.INSTANCE.register(JukeboxConstants.JUKEBOX_MINECART_ENTITY,
 				(context) -> new MinecartEntityRenderer<JukeboxMinecartEntity>(context,
+						EntityModelLayers.FURNACE_MINECART));
+		EntityRendererRegistry.INSTANCE.register(JukeboxConstants.NOTEBLOCK_MINECART_ENTITY,
+				(context) -> new MinecartEntityRenderer<NoteblockMinecartEntity>(context,
 						EntityModelLayers.FURNACE_MINECART));
 		handler = new ClientPacketHandler();
 	}

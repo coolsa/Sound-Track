@@ -5,8 +5,7 @@
 	"compatibilityLevel": "JAVA_16",
 	"mixins": [],
 	"client": [
-		"SoundManagerAccessor",
-		"SoundSystemAccessor"
+		"DetectorRailMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
