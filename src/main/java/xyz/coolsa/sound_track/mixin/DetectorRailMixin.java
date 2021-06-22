@@ -1,9 +1,9 @@
-package xyz.coolsa.jukebox.mixin;
+package xyz.coolsa.sound_track.mixin;
 
 import net.minecraft.block.DetectorRailBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.World;
-import xyz.coolsa.jukebox.JukeboxMinecartEntity;
+import xyz.coolsa.sound_track.JukeboxMinecartEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.entity.Entity;

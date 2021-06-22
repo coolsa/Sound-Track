@@ -1,4 +1,4 @@
-package xyz.coolsa.jukebox;
+package xyz.coolsa.sound_track;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -6,11 +6,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 
-public class JukeboxConstants {
+public class SoundTrackConstants {
 	/**
 	 * Name of the mod, for all identifiers used.
 	 */
-	public static final String MOD_NAME = "jukeboxmod";
+	public static final String MOD_NAME = "sound_track";
 	/**
 	 * Jukebox minecart packet identifier.
 	 */

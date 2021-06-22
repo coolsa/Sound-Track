@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "jukebox_mod",
+  "id": "sound_track",
   "version": "${version}",
 
-  "name": "Jukebox mod",
-  "description": "Minecart Jukeboxes. That is all.",
+  "name": "Sound-Track",
+  "description": "Minecart Jukeboxes and Noteblocks!",
   "authors": [
     "coolsa"
   ],
@@ -14,19 +14,19 @@
   },
 
   "license": "GPL v3.0",
-  "icon": "assets/jukeboxmod/icon.png",
+  "icon": "assets/sound_track/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "xyz.coolsa.jukebox.ExampleMod"
+      "xyz.coolsa.sound_track.SoundTrack"
     ],
     "client": [
-      "xyz.coolsa.jukebox.ExampleMod"
+      "xyz.coolsa.sound_track.SoundTrack"
     ]
   },
   "mixins": [
-    "jukeboxmod.mixins.json"
+    "sound_track.mixins.json"
   ],
 
   "depends": {

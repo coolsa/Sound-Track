@@ -1,4 +1,4 @@
-package xyz.coolsa.jukebox;
+package xyz.coolsa.sound_track;
 
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
@@ -22,7 +22,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
-public class NoteblockMinecartItem extends Item {
+public class JukeboxMinecartItem extends Item {
 	private static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
 		private final ItemDispenserBehavior defaultBehavior = new ItemDispenserBehavior();
 
@@ -62,7 +62,7 @@ public class NoteblockMinecartItem extends Item {
 					double15 = -0.4;
 				}
 			}
-			AbstractMinecartEntity abstractMinecartEntity17 = new NoteblockMinecartEntity(world5, double6,
+			AbstractMinecartEntity abstractMinecartEntity17 = new JukeboxMinecartEntity(world5, double6,
 					double8 + double15, double10);
 			if (stack.hasCustomName()) {
 				abstractMinecartEntity17.setCustomName(stack.getName());
@@ -78,7 +78,7 @@ public class NoteblockMinecartItem extends Item {
 		}
 	};
 
-	public NoteblockMinecartItem(Settings settings) {
+	public JukeboxMinecartItem(Settings settings) {
 		super(settings);
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
 		// TODO Auto-generated constructor stub
@@ -101,7 +101,7 @@ public class NoteblockMinecartItem extends Item {
 			if (rail.isAscending()) {
 				slope = 0.5;
 			}
-			AbstractMinecartEntity abstractMinecartEntity10 = new NoteblockMinecartEntity(world,
+			AbstractMinecartEntity abstractMinecartEntity10 = new JukeboxMinecartEntity(world,
 					pos.getX() + 0.5, pos.getY() + 0.0625 + slope, pos.getZ() + 0.5);
 			if (item.hasCustomName()) {
 				abstractMinecartEntity10.setCustomName(item.getName());
