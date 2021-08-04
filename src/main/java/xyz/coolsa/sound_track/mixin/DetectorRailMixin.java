@@ -5,7 +5,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.world.World;
 import xyz.coolsa.sound_track.JukeboxMinecartEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
 import net.minecraft.item.MusicDiscItem;
@@ -30,6 +29,7 @@ public class DetectorRailMixin {
 	@Inject(at = @At("HEAD"), method = "getComparatorOutput", cancellable = true)
 	private void getJukeboxMinecartComparatorValue(BlockState state, World world, BlockPos pos,
 			CallbackInfoReturnable<Integer> info) {
+		if(!state.get(DetectorRailBlock.POWERED).booleanValue()) return;
 		List<JukeboxMinecartEntity> list = this.getCarts(world, pos, JukeboxMinecartEntity.class, arg -> true);
 //		System.out.println(list);
 		if (!list.isEmpty() && !list.get(0).getRecord().isEmpty()

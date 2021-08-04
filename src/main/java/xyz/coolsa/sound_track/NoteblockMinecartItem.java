@@ -7,18 +7,14 @@ import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.enums.RailShape;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
-import net.minecraft.entity.vehicle.AbstractMinecartEntity.Type;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.MinecartItem;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
@@ -37,7 +33,7 @@ public class NoteblockMinecartItem extends Item {
 			double double6 = pointer.getX() + direction4.getOffsetX() * 1.125;
 			double double8 = Math.floor(pointer.getY()) + direction4.getOffsetY();
 			double double10 = pointer.getZ() + direction4.getOffsetZ() * 1.125;
-			BlockPos blockPos12 = pointer.getBlockPos().offset(direction4);
+			BlockPos blockPos12 = pointer.getPos().offset(direction4);
 			BlockState blockState13 = world5.getBlockState(blockPos12);
 			RailShape railShape14 = (blockState13.getBlock() instanceof AbstractRailBlock)
 					? blockState13.<RailShape>get(((AbstractRailBlock) blockState13.getBlock()).getShapeProperty())
@@ -74,7 +70,7 @@ public class NoteblockMinecartItem extends Item {
 
 		@Override
 		protected void playSound(BlockPointer pointer) {
-			pointer.getWorld().syncWorldEvent(1000, pointer.getBlockPos(), 0);
+			pointer.getWorld().syncWorldEvent(1000, pointer.getPos(), 0);
 		}
 	};
 

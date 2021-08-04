@@ -6,7 +6,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 
 public class SoundTrackClient implements ClientModInitializer {
-    private static ClientPacketHandler handler;
+    @SuppressWarnings("unused")
+	private static ClientPacketHandler handler;
 
     @Override
     public void onInitializeClient() {

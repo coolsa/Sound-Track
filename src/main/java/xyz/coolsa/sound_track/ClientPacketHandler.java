@@ -1,8 +1,6 @@
 package xyz.coolsa.sound_track;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -12,7 +10,6 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.sound.EntityTrackingSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
-import net.minecraft.client.sound.SoundSystem;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MusicDiscItem;
@@ -45,11 +42,13 @@ public class ClientPacketHandler {
 	 * @param buf
 	 * @param responseSender
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	private void jukeboxMinecartPlayUpdate(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf,
 			PacketSender responseSender) {
 		int entityId = buf.readInt();
 		ItemStack record = buf.readItemStack();
-		long playSeeking = buf.readLong();
+		@SuppressWarnings("unused")
+		long playSeeking = buf.readLong(); //TODO: Add seeking ability, so jukebox minecarts can start playback at any time.
 		client.execute(() -> {
 			boolean isJukeboxMinecart = client.world.getEntityById(entityId) instanceof JukeboxMinecartEntity;
 			if (!isJukeboxMinecart) {
