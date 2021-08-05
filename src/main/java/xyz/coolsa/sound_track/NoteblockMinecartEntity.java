@@ -19,6 +19,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.stat.Stats;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -111,6 +112,7 @@ public class NoteblockMinecartEntity extends AbstractMinecartEntity {
 			}
 			this.playNote(null);
 			result = ActionResult.CONSUME;
+			player.incrementStat(Stats.TUNE_NOTEBLOCK);
 		}
 		return result;
 	}
@@ -121,6 +123,7 @@ public class NoteblockMinecartEntity extends AbstractMinecartEntity {
 			return true;
 		if (source.getAttacker() instanceof PlayerEntity) {
 			this.playNote(null);
+			((PlayerEntity) source.getAttacker()).incrementStat(Stats.PLAY_NOTEBLOCK);
 		}
 		if (source.isSourceCreativePlayer())
 			amount *= 2.2;

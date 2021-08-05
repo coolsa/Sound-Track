@@ -17,6 +17,7 @@ import net.minecraft.nbt.NbtElement;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Clearable;
 import net.minecraft.util.Hand;
@@ -103,21 +104,24 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 		ActionResult result = ActionResult.SUCCESS;
 		if (!player.world.isClient) {
 			if (player.getStackInHand(hand).getItem() instanceof MusicDiscItem && this.record.isEmpty()) {
-				this.record = player.getStackInHand(hand).copy();
-				if (!player.isCreative())
-					player.setStackInHand(hand, ItemStack.EMPTY);
-				this.playRecord();
-				result = ActionResult.CONSUME;
-			} else if (!this.record.isEmpty()) {
-				double randomX = this.world.random.nextFloat() * 0.7 - 0.5;
+				this.record = player.getStackInHand(hand).copy(); //copy the players record
+				this.record.setCount(1); //set the count to 1 (only play 1 record lmao)
+				if (!player.isCreative()) { //if they are not in creative
+					player.getStackInHand(hand).decrement(1); //decrement the records held by 1, in line with vanilla.
+				}
+				player.incrementStat(Stats.PLAY_RECORD); //increment their stat.
+				this.playRecord(); //actually play the record
+				result = ActionResult.CONSUME; //its a consume action.
+			} else if (!this.record.isEmpty()) { //if we already have something in the minecart,
+				double randomX = this.world.random.nextFloat() * 0.7 - 0.5; //random position near the minecart
 				double randomY = this.world.random.nextFloat() * 0.7 + 0.66;
 				double randomZ = this.world.random.nextFloat() * 0.7 - 0.5;
 				ItemEntity entity = new ItemEntity(this.world, this.getX() + randomX, this.getY() + randomY,
-						this.getZ() + randomZ, this.record.copy());
-				entity.setToDefaultPickupDelay();
-				this.world.spawnEntity(entity);
-				this.record = ItemStack.EMPTY;
-				this.playRecord();
+						this.getZ() + randomZ, this.record.copy()); // create the item entity.
+				entity.setToDefaultPickupDelay(); // we go ahead and give it a default pickup delay
+				this.world.spawnEntity(entity); //spawn the item
+				this.record = ItemStack.EMPTY; //the jukebox minecart is now empty
+				this.playRecord(); //and update the record playback.
 			}
 		}
 		return result;
