@@ -6,6 +6,7 @@ import net.minecraft.util.registry.Registry;
 public class SoundTrack implements ModInitializer {
 	@Override
 	public void onInitialize() {
+		//register the items and the entities.
 		Registry.register(Registry.ITEM, SoundTrackConstants.JUKEBOX_MINECART_ITEM_ID,
 				SoundTrackConstants.JUKEBOX_MINECART_ITEM);
 		Registry.register(Registry.ENTITY_TYPE, SoundTrackConstants.JUKEBOX_MINECART_ENTITY_ID,

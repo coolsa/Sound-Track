@@ -1,8 +1,10 @@
 package xyz.coolsa.sound_track;
 
+import io.github.foundationgames.phonos.item.CustomMusicDiscItem;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -103,36 +105,40 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 	public ActionResult interact(PlayerEntity player, Hand hand) {
 		ActionResult result = ActionResult.SUCCESS;
 		if (!player.world.isClient) {
-			if (player.getStackInHand(hand).getItem() instanceof MusicDiscItem && this.record.isEmpty()) {
-				this.record = player.getStackInHand(hand).copy(); //copy the players record
-				this.record.setCount(1); //set the count to 1 (only play 1 record lmao)
-				if (!player.isCreative()) { //if they are not in creative
-					player.getStackInHand(hand).decrement(1); //decrement the records held by 1, in line with vanilla.
+			// if we have a normal music disc, or it is a phonos custom music disc,
+			if ((player.getStackInHand(hand).getItem() instanceof MusicDiscItem
+					|| (FabricLoader.getInstance().isModLoaded("phonos")
+							&& player.getStackInHand(hand).getItem() instanceof CustomMusicDiscItem))
+					&& this.record.isEmpty()) {
+				this.record = player.getStackInHand(hand).copy(); // copy the players record
+				this.record.setCount(1); // set the count to 1 (only play 1 record)
+				if (!player.isCreative()) { // if they are not in creative
+					player.getStackInHand(hand).decrement(1); // decrement the records held by 1, in line with vanilla.
 				}
-				player.incrementStat(Stats.PLAY_RECORD); //increment their stat.
-				this.playRecord(); //actually play the record
-				result = ActionResult.CONSUME; //its a consume action.
-			} else if (!this.record.isEmpty()) { //if we already have something in the minecart,
-				double randomX = this.world.random.nextFloat() * 0.7 - 0.5; //random position near the minecart
+				player.incrementStat(Stats.PLAY_RECORD); // increment their stat.
+				this.playRecord(); // actually play the record
+				result = ActionResult.CONSUME; // its a consume action.
+			} else if (!this.record.isEmpty()) { // if we already have something in the minecart,
+				double randomX = this.world.random.nextFloat() * 0.7 - 0.5; // random position near the minecart
 				double randomY = this.world.random.nextFloat() * 0.7 + 0.66;
 				double randomZ = this.world.random.nextFloat() * 0.7 - 0.5;
 				ItemEntity entity = new ItemEntity(this.world, this.getX() + randomX, this.getY() + randomY,
 						this.getZ() + randomZ, this.record.copy()); // create the item entity.
 				entity.setToDefaultPickupDelay(); // we go ahead and give it a default pickup delay
-				this.world.spawnEntity(entity); //spawn the item
-				this.record = ItemStack.EMPTY; //the jukebox minecart is now empty
-				this.playRecord(); //and update the record playback.
+				this.world.spawnEntity(entity); // spawn the item
+				this.record = ItemStack.EMPTY; // the jukebox minecart is now empty
+				this.playRecord(); // and update the record playback.
 			}
 		}
-		return result;
+		return result; // return the action result
 	}
 
-	private void playRecord() {
+	private void playRecord() { // send the packet to play a record.
 		PacketByteBuf buf = PacketByteBufs.create();
-		int entityId = this.getId();
-		buf.writeInt(entityId);
-		buf.writeItemStack(this.record);
-		buf.writeLong(0);
+		buf.writeInt(this.getId()); // read/write this entity's id to a packet
+		buf.writeItemStack(this.record); // also write the record that it has into the packet
+		buf.writeLong(0); // TODO: add seeking to the playback.
+		// loop through all of the players and send them the packet for playback.
 		for (ServerPlayerEntity players : PlayerLookup.around((ServerWorld) world, this.getBlockPos(), 128))
 			ServerPlayNetworking.send(players, SoundTrackConstants.JUKEBOX_MINECART_PLAY, buf);
 	}

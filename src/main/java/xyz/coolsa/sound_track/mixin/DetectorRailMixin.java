@@ -1,6 +1,7 @@
 package xyz.coolsa.sound_track.mixin;
 
 import net.minecraft.block.DetectorRailBlock;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.World;
 import xyz.coolsa.sound_track.JukeboxMinecartEntity;
@@ -18,6 +19,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import io.github.foundationgames.phonos.item.CustomMusicDiscItem;
+
 @Mixin(DetectorRailBlock.class)
 public class DetectorRailMixin {
 	@Shadow
@@ -29,12 +32,18 @@ public class DetectorRailMixin {
 	@Inject(at = @At("HEAD"), method = "getComparatorOutput", cancellable = true)
 	private void getJukeboxMinecartComparatorValue(BlockState state, World world, BlockPos pos,
 			CallbackInfoReturnable<Integer> info) {
-		if(!state.get(DetectorRailBlock.POWERED).booleanValue()) return;
+		// if the detector rail is not powered, lets exit.
+		if (!state.get(DetectorRailBlock.POWERED).booleanValue())
+			return;
+		// otherwise, lets get a list of the carts on top of it.
 		List<JukeboxMinecartEntity> list = this.getCarts(world, pos, JukeboxMinecartEntity.class, arg -> true);
-//		System.out.println(list);
-		if (!list.isEmpty() && !list.get(0).getRecord().isEmpty()
-				&& list.get(0).getRecord().getItem() instanceof MusicDiscItem) {
-			info.setReturnValue(((MusicDiscItem) list.get(0).getRecord().getItem()).getComparatorOutput());
+		if (!list.isEmpty() && !list.get(0).getRecord().isEmpty()) { // if there are actually jukebox minecarts
+			if (list.get(0).getRecord().getItem() instanceof MusicDiscItem) { // read the power level of vanilla disc
+				info.setReturnValue(((MusicDiscItem) list.get(0).getRecord().getItem()).getComparatorOutput());
+			} else if (FabricLoader.getInstance().isModLoaded("phonos") // read power level of phonos disc.
+					&& list.get(0).getRecord().getItem() instanceof CustomMusicDiscItem) {
+				info.setReturnValue(list.get(0).getRecord().getOrCreateSubNbt("MusicData").getInt("ComparatorSignal"));
+			}
 		}
 	}
 }

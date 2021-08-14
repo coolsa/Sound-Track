@@ -36,6 +36,6 @@
     "java": ">=16"
   },
   "suggests": {
-    "another-mod": "*"
+    "phonos": ">=0.1.2"
   }
 }
