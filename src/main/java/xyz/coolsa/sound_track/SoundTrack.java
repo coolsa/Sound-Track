@@ -4,8 +4,10 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 
 public class SoundTrack implements ModInitializer {
+	public static PhonosCompatibility phonos;
 	@Override
 	public void onInitialize() {
+		phonos = new PhonosCompatibility();
 		//register the items and the entities.
 		Registry.register(Registry.ITEM, SoundTrackConstants.JUKEBOX_MINECART_ITEM_ID,
 				SoundTrackConstants.JUKEBOX_MINECART_ITEM);

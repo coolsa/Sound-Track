@@ -1,6 +1,5 @@
 package xyz.coolsa.sound_track;
 
-import io.github.foundationgames.phonos.item.CustomMusicDiscItem;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -106,9 +105,8 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 		ActionResult result = ActionResult.SUCCESS;
 		if (!player.world.isClient) {
 			// if we have a normal music disc, or it is a phonos custom music disc,
-			if ((player.getStackInHand(hand).getItem() instanceof MusicDiscItem
-					|| (FabricLoader.getInstance().isModLoaded("phonos")
-							&& player.getStackInHand(hand).getItem() instanceof CustomMusicDiscItem))
+			if ((player.getStackInHand(hand).getItem() instanceof MusicDiscItem || (SoundTrack.phonos.isLoaded()
+					&& SoundTrack.phonos.isCustomMusicDisc(player.getStackInHand(hand).getItem())))
 					&& this.record.isEmpty()) {
 				this.record = player.getStackInHand(hand).copy(); // copy the players record
 				this.record.setCount(1); // set the count to 1 (only play 1 record)

@@ -34,7 +34,7 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Phonos, for custom music disc compatability.
-	modImplementation "curse.maven:phonos-417003:${project.phonos_version}"
+	modCompileOnly "curse.maven:phonos-417003:${project.phonos_version}"
 	
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

@@ -5,6 +5,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.World;
 import xyz.coolsa.sound_track.JukeboxMinecartEntity;
+import xyz.coolsa.sound_track.SoundTrack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
@@ -19,7 +20,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import io.github.foundationgames.phonos.item.CustomMusicDiscItem;
 
 @Mixin(DetectorRailBlock.class)
 public class DetectorRailMixin {
@@ -40,8 +40,8 @@ public class DetectorRailMixin {
 		if (!list.isEmpty() && !list.get(0).getRecord().isEmpty()) { // if there are actually jukebox minecarts
 			if (list.get(0).getRecord().getItem() instanceof MusicDiscItem) { // read the power level of vanilla disc
 				info.setReturnValue(((MusicDiscItem) list.get(0).getRecord().getItem()).getComparatorOutput());
-			} else if (FabricLoader.getInstance().isModLoaded("phonos") // read power level of phonos disc.
-					&& list.get(0).getRecord().getItem() instanceof CustomMusicDiscItem) {
+			} else if (SoundTrack.phonos.isLoaded()// read power level of phonos disc.
+					&& SoundTrack.phonos.isCustomMusicDisc(list.get(0).getRecord().getItem())) {
 				info.setReturnValue(list.get(0).getRecord().getOrCreateSubNbt("MusicData").getInt("ComparatorSignal"));
 			}
 		}
