@@ -16,12 +16,6 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
-    maven {
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
 }
 
 dependencies {
@@ -34,7 +28,11 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Phonos, for custom music disc compatability.
-	modCompileOnly "curse.maven:phonos-417003:${project.phonos_version}"
+	compileOnly("io.github.foundationgames:phonos"){
+		version {
+			branch = "${project.phonos_branch}"
+		}
+	}
 	
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.

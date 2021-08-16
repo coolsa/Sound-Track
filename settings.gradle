@@ -7,3 +7,8 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+sourceControl {
+    gitRepository('https://github.com/FoundationGames/phonos.git') {
+        producesModule('io.github.foundationgames:phonos')
+    }
+}
