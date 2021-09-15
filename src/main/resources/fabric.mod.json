@@ -9,8 +9,9 @@
     "coolsa"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/sound-track",
+    "sources": "https://github.com/coolsa/Sound-Track",
+    "issues": "https://github.com/coolsa/Sound-Track/issues"
   },
 
   "license": "GPL v3.0",
