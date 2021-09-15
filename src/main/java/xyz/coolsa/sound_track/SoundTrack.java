@@ -13,10 +13,10 @@ public class SoundTrack implements ModInitializer {
 				SoundTrackConstants.JUKEBOX_MINECART_ITEM);
 		Registry.register(Registry.ENTITY_TYPE, SoundTrackConstants.JUKEBOX_MINECART_ENTITY_ID,
 				SoundTrackConstants.JUKEBOX_MINECART_ENTITY);
-		Registry.register(Registry.ITEM, SoundTrackConstants.NOTEBLOCK_MINECART_ITEM_ID,
-				SoundTrackConstants.NOTEBLOCK_MINECART_ITEM);
-		Registry.register(Registry.ENTITY_TYPE, SoundTrackConstants.NOTEBLOCK_MINECART_ENTITY_ID,
-				SoundTrackConstants.NOTEBLOCK_MINECART_ENTITY);
+		Registry.register(Registry.ITEM, SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM_ID,
+				SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM);
+		Registry.register(Registry.ENTITY_TYPE, SoundTrackConstants.NOTE_BLOCK_MINECART_ENTITY_ID,
+				SoundTrackConstants.NOTE_BLOCK_MINECART_ENTITY);
 //		FabricDefaultAttributeRegistry.register(JUKEBOX_MINECART_ENTITY, );
 	}
 }

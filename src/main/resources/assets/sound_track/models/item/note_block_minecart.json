@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "sound_track:item/noteblock_minecart"
+    "layer0": "sound_track:item/note_block_minecart"
   }
 }

@@ -1,9 +1,8 @@
-package xyz.coolsa.sound_track;
+package xyz.coolsa.sound_track.entity;
 
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -25,6 +24,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import xyz.coolsa.sound_track.SoundTrack;
+import xyz.coolsa.sound_track.SoundTrackConstants;
 
 public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Clearable {
 
@@ -36,7 +37,7 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 		super(type, world);
 	}
 
-	protected JukeboxMinecartEntity(World world, double x, double y, double z) {
+	public JukeboxMinecartEntity(World world, double x, double y, double z) {
 		super(SoundTrackConstants.JUKEBOX_MINECART_ENTITY, world, x, y, z);
 	}
 
@@ -166,5 +167,4 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 		this.powered = false;
 		super.moveOffRail();
 	}
-
 }

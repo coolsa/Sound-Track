@@ -1,11 +1,10 @@
-package xyz.coolsa.sound_track;
+package xyz.coolsa.sound_track.client.networking;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.sound.EntityTrackingSoundInstance;
@@ -23,6 +22,10 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import xyz.coolsa.sound_track.SoundTrack;
+import xyz.coolsa.sound_track.SoundTrackConstants;
+import xyz.coolsa.sound_track.entity.JukeboxMinecartEntity;
+import xyz.coolsa.sound_track.entity.NoteBlockMinecartEntity;
 import net.minecraft.block.enums.Instrument;
 
 public class ClientPacketHandler {
@@ -34,7 +37,7 @@ public class ClientPacketHandler {
 				(client, handler, buf, responseSender) -> {
 					this.jukeboxMinecartPlayUpdate(client, handler, buf, responseSender);
 				});
-		ClientPlayNetworking.registerGlobalReceiver(SoundTrackConstants.NOTEBLOCK_MINECART_PLAY,
+		ClientPlayNetworking.registerGlobalReceiver(SoundTrackConstants.NOTE_BLOCK_MINECART_PLAY,
 				(client, handler, buf, responseSender) -> {
 					this.noteblockMinecartPlayUpdate(client, handler, buf, responseSender);
 				});
@@ -122,10 +125,10 @@ public class ClientPacketHandler {
 		BlockPos pos = buf.readBlockPos(); // read the position of the block below the entity.
 		Integer note = buf.readInt(); // and read the tuning of the noteblock minecart.
 		client.execute(() -> {
-			if (!(client.world.getEntityById(entityId) instanceof NoteblockMinecartEntity)) {
+			if (!(client.world.getEntityById(entityId) instanceof NoteBlockMinecartEntity)) {
 				return; // if the entity is not a minecart entity, lets skip.
 			}
-			NoteblockMinecartEntity entity = (NoteblockMinecartEntity) client.world.getEntityById(entityId); // otherwise,
+			NoteBlockMinecartEntity entity = (NoteBlockMinecartEntity) client.world.getEntityById(entityId); // otherwise,
 			Instrument.fromBlockState(entity.world.getBlockState(pos)); // read the instrument from the target block
 			SoundManager soundSystem = MinecraftClient.getInstance().getSoundManager(); // get the sound manager
 			EntityTrackingSoundInstance noteInstance = new EntityTrackingSoundInstance( // track the entity, play the

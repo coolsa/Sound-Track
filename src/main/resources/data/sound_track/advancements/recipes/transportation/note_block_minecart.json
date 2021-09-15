@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "sound_track:noteblock_minecart"
+      "sound_track:note_block_minecart"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "sound_track:noteblock_minecart"
+        "recipe": "sound_track:note_block_minecart"
       }
     }
   },

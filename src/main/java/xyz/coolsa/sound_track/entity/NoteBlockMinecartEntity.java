@@ -1,4 +1,4 @@
-package xyz.coolsa.sound_track;
+package xyz.coolsa.sound_track.entity;
 
 import java.util.Iterator;
 
@@ -27,8 +27,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import xyz.coolsa.sound_track.SoundTrackConstants;
 
-public class NoteblockMinecartEntity extends AbstractMinecartEntity {
+public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
 
 	// initiate note to lowest note by default.
 	private Integer note = Properties.NOTE.getValues().iterator().next();
@@ -36,12 +37,12 @@ public class NoteblockMinecartEntity extends AbstractMinecartEntity {
 	private BlockPos pos = this.getBlockPos();
 //	private static final int min_note;
 
-	public NoteblockMinecartEntity(EntityType<? extends NoteblockMinecartEntity> type, World world) {
+	public NoteBlockMinecartEntity(EntityType<? extends NoteBlockMinecartEntity> type, World world) {
 		super(type, world);
 	}
 
-	protected NoteblockMinecartEntity(World world, double x, double y, double z) {
-		super(SoundTrackConstants.NOTEBLOCK_MINECART_ENTITY, world, x, y, z);
+	public NoteBlockMinecartEntity(World world, double x, double y, double z) {
+		super(SoundTrackConstants.NOTE_BLOCK_MINECART_ENTITY, world, x, y, z);
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class NoteblockMinecartEntity extends AbstractMinecartEntity {
 
 	@Override
 	public ItemStack getPickBlockStack() {
-		return new ItemStack(SoundTrackConstants.NOTEBLOCK_MINECART_ITEM);
+		return new ItemStack(SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM);
 	}
 
 	@Override
@@ -156,7 +157,7 @@ public class NoteblockMinecartEntity extends AbstractMinecartEntity {
 		buf.writeInt(note);
 //		buf.writeItemStack(this.record);
 		for (ServerPlayerEntity players : PlayerLookup.around((ServerWorld) world, this.getBlockPos(), 128))
-			ServerPlayNetworking.send(players, SoundTrackConstants.NOTEBLOCK_MINECART_PLAY, buf);
+			ServerPlayNetworking.send(players, SoundTrackConstants.NOTE_BLOCK_MINECART_PLAY, buf);
 	}
 
 	@Override
@@ -180,5 +181,4 @@ public class NoteblockMinecartEntity extends AbstractMinecartEntity {
 		this.powered = false;
 		super.moveOffRail();
 	}
-
 }

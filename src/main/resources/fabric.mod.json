@@ -22,7 +22,7 @@
       "xyz.coolsa.sound_track.SoundTrack"
     ],
     "client": [
-      "xyz.coolsa.sound_track.SoundTrackClient"
+      "xyz.coolsa.sound_track.client.SoundTrackClient"
     ]
   },
   "mixins": [

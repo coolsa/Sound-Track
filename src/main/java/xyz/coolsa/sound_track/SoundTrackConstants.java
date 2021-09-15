@@ -5,6 +5,11 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
+import xyz.coolsa.sound_track.entity.JukeboxMinecartEntity;
+import xyz.coolsa.sound_track.entity.NoteBlockMinecartEntity;
+import xyz.coolsa.sound_track.entity.type.JukeboxMinecartType;
+import xyz.coolsa.sound_track.entity.type.NoteBlockMinecartType;
+import xyz.coolsa.sound_track.item.SoundTrackMinecartItem;
 
 public class SoundTrackConstants {
 	/**
@@ -26,7 +31,8 @@ public class SoundTrackConstants {
 	/**
 	 * The actual jukebox minecart item.
 	 */
-	public static final Item JUKEBOX_MINECART_ITEM = new JukeboxMinecartItem(
+	public static final Item JUKEBOX_MINECART_ITEM = new SoundTrackMinecartItem(
+			new JukeboxMinecartType(),
 			new Item.Settings().maxCount(1).group(ItemGroup.TRANSPORTATION));
 	/**
 	 * The actual jukebox minecart entity.
@@ -34,29 +40,29 @@ public class SoundTrackConstants {
 	public static final EntityType<JukeboxMinecartEntity> JUKEBOX_MINECART_ENTITY = EntityType.Builder
 			.<JukeboxMinecartEntity>create(JukeboxMinecartEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.7f)
 			.maxTrackingRange(8).build(JUKEBOX_MINECART_ENTITY_ID.toString());
-	
-	
+
 	/**
-	 * Noteblock minecart packet identifier.
+	 * Note block minecart packet identifier.
 	 */
-	public static final Identifier NOTEBLOCK_MINECART_PLAY = new Identifier(MOD_NAME, "noteblock_minecart_play");
+	public static final Identifier NOTE_BLOCK_MINECART_PLAY = new Identifier(MOD_NAME, "note_block_minecart_play");
 	/**
-	 * The ID of the noteblock minecart item.
+	 * The ID of the note block minecart item.
 	 */
-	public static final Identifier NOTEBLOCK_MINECART_ITEM_ID = new Identifier(MOD_NAME, "noteblock_minecart");
+	public static final Identifier NOTE_BLOCK_MINECART_ITEM_ID = new Identifier(MOD_NAME, "note_block_minecart");
 	/**
-	 * The ID of the noteblock minecart entity.
+	 * The ID of the note block minecart entity.
 	 */
-	public static final Identifier NOTEBLOCK_MINECART_ENTITY_ID = new Identifier(MOD_NAME, "noteblock_minecart");
+	public static final Identifier NOTE_BLOCK_MINECART_ENTITY_ID = new Identifier(MOD_NAME, "note_block_minecart");
 	/**
-	 * The actual noteblock minecart item.
+	 * The actual note block minecart item.
 	 */
-	public static final Item NOTEBLOCK_MINECART_ITEM = new NoteblockMinecartItem(
+	public static final Item NOTE_BLOCK_MINECART_ITEM = new SoundTrackMinecartItem(
+			new NoteBlockMinecartType(),
 			new Item.Settings().maxCount(1).group(ItemGroup.TRANSPORTATION));
 	/**
 	 * The actual noteblock minecart entity.
 	 */
-	public static final EntityType<NoteblockMinecartEntity> NOTEBLOCK_MINECART_ENTITY = EntityType.Builder
-			.<NoteblockMinecartEntity>create(NoteblockMinecartEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.7f)
-			.maxTrackingRange(8).build(NOTEBLOCK_MINECART_ENTITY_ID.toString());
+	public static final EntityType<NoteBlockMinecartEntity> NOTE_BLOCK_MINECART_ENTITY = EntityType.Builder
+			.<NoteBlockMinecartEntity>create(NoteBlockMinecartEntity::new, SpawnGroup.MISC).setDimensions(0.98f, 0.7f)
+			.maxTrackingRange(8).build(NOTE_BLOCK_MINECART_ENTITY_ID.toString());
 }

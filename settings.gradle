@@ -8,7 +8,7 @@ pluginManagement {
     }
 }
 sourceControl {
-    gitRepository('https://github.com/FoundationGames/phonos.git') {
+    gitRepository('https://github.com/coolsa/phonos.git') {
         producesModule('io.github.foundationgames:phonos')
     }
 }

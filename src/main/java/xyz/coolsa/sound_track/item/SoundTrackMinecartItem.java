@@ -1,4 +1,4 @@
-package xyz.coolsa.sound_track;
+package xyz.coolsa.sound_track.item;
 
 import net.minecraft.block.AbstractRailBlock;
 import net.minecraft.block.BlockState;
@@ -17,8 +17,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import xyz.coolsa.sound_track.entity.type.SoundTrackMinecartType;
 
-public class JukeboxMinecartItem extends Item {
+public class SoundTrackMinecartItem extends Item {
+	private final SoundTrackMinecartType minecartType;
 	private static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
 		private final ItemDispenserBehavior defaultBehavior = new ItemDispenserBehavior();
 
@@ -27,43 +29,43 @@ public class JukeboxMinecartItem extends Item {
 		 */
 		@Override
 		public ItemStack dispenseSilently(BlockPointer pointer, ItemStack stack) {
-			double double15 = 0.0;
-			Direction direction4 = pointer.getBlockState().get(DispenserBlock.FACING);
-			World world5 = pointer.getWorld();
-			double double6 = pointer.getX() + direction4.getOffsetX() * 1.125;
-			double double8 = Math.floor(pointer.getY()) + direction4.getOffsetY();
-			double double10 = pointer.getZ() + direction4.getOffsetZ() * 1.125;
-			BlockPos blockPos12 = pointer.getPos().offset(direction4);
-			BlockState blockState13 = world5.getBlockState(blockPos12);
+			double yOffset = 0.0;
+			Direction direction = pointer.getBlockState().get(DispenserBlock.FACING);
+			World world = pointer.getWorld();
+			double xPos = pointer.getX() + direction.getOffsetX() * 1.125;
+			double yPos = Math.floor(pointer.getY()) + direction.getOffsetY();
+			double zPos = pointer.getZ() + direction.getOffsetZ() * 1.125;
+			BlockPos blockPos = pointer.getPos().offset(direction);
+			BlockState blockState13 = world.getBlockState(blockPos);
 			RailShape railShape14 = (blockState13.getBlock() instanceof AbstractRailBlock)
 					? blockState13.<RailShape>get(((AbstractRailBlock) blockState13.getBlock()).getShapeProperty())
 					: RailShape.NORTH_SOUTH;
 			if (blockState13.isIn(BlockTags.RAILS)) {
 				if (railShape14.isAscending()) {
-					double15 = 0.6;
+					yOffset = 0.6;
 				} else {
-					double15 = 0.1;
+					yOffset = 0.1;
 				}
 			} else {
-				if (!blockState13.isAir() || !world5.getBlockState(blockPos12.down()).isIn(BlockTags.RAILS)) {
+				if (!blockState13.isAir() || !world.getBlockState(blockPos.down()).isIn(BlockTags.RAILS)) {
 					return this.defaultBehavior.dispense(pointer, stack);
 				}
-				BlockState blockState17 = world5.getBlockState(blockPos12.down());
-				RailShape railShape18 = (blockState17.getBlock() instanceof AbstractRailBlock)
-						? blockState17.<RailShape>get(((AbstractRailBlock) blockState17.getBlock()).getShapeProperty())
+				BlockState blockState = world.getBlockState(blockPos.down());
+				RailShape railShape = (blockState.getBlock() instanceof AbstractRailBlock)
+						? blockState.<RailShape>get(((AbstractRailBlock) blockState.getBlock()).getShapeProperty())
 						: RailShape.NORTH_SOUTH;
-				if (direction4 == Direction.DOWN || !railShape18.isAscending()) {
-					double15 = -0.9;
+				if (direction == Direction.DOWN || !railShape.isAscending()) {
+					yOffset = -0.9;
 				} else {
-					double15 = -0.4;
+					yOffset = -0.4;
 				}
 			}
-			AbstractMinecartEntity abstractMinecartEntity17 = new JukeboxMinecartEntity(world5, double6,
-					double8 + double15, double10);
+			AbstractMinecartEntity minecartEntity = ((SoundTrackMinecartItem)stack.getItem()).getMinecartType().createMinecartEntity(world, xPos,
+					yPos + yOffset, zPos);
 			if (stack.hasCustomName()) {
-				abstractMinecartEntity17.setCustomName(stack.getName());
+				minecartEntity.setCustomName(stack.getName());
 			}
-			world5.spawnEntity(abstractMinecartEntity17);
+			world.spawnEntity(minecartEntity);
 			stack.decrement(1);
 			return stack;
 		}
@@ -74,8 +76,9 @@ public class JukeboxMinecartItem extends Item {
 		}
 	};
 
-	public JukeboxMinecartItem(Settings settings) {
+	public SoundTrackMinecartItem(SoundTrackMinecartType minecartType, Settings settings) {
 		super(settings);
+		this.minecartType = minecartType;
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
 		// TODO Auto-generated constructor stub
 	}
@@ -97,15 +100,19 @@ public class JukeboxMinecartItem extends Item {
 			if (rail.isAscending()) {
 				slope = 0.5;
 			}
-			AbstractMinecartEntity abstractMinecartEntity10 = new JukeboxMinecartEntity(world,
+			AbstractMinecartEntity minecart = ((SoundTrackMinecartItem)item.getItem()).getMinecartType().createMinecartEntity(world,
 					pos.getX() + 0.5, pos.getY() + 0.0625 + slope, pos.getZ() + 0.5);
 			if (item.hasCustomName()) {
-				abstractMinecartEntity10.setCustomName(item.getName());
+				minecart.setCustomName(item.getName());
 			}
-			world.spawnEntity(abstractMinecartEntity10);
+			world.spawnEntity(minecart);
 			world.emitGameEvent(context.getPlayer(), GameEvent.ENTITY_PLACE, pos);
 		}
 		item.decrement(1);
 		return ActionResult.success(world.isClient);
+	}
+	
+	public SoundTrackMinecartType getMinecartType() {
+		return this.minecartType;
 	}
 }
