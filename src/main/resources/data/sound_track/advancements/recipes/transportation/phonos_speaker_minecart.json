@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "sound_track:jukebox_minecart"
+      "sound_track:phonos_speaker_minecart"
     ]
   },
   "criteria": {
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "sound_track:jukebox_minecart"
+        "recipe": "sound_track:phonos_speaker_minecart"
       }
     }
   },

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"#",
+		"M"
+	],
+	"key": {
+		"#": {
+			"item": "phonos:loudspeaker"
+		},
+		"M": {
+			"item": "minecraft:minecart"
+		}
+	},
+	"result": {
+		"item": "sound_track:phonos_speaker_minecart",
+		"count": 1
+	}
+}

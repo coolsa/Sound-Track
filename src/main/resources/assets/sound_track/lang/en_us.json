@@ -1,6 +1,8 @@
 {
   "item.sound_track.note_block_minecart":"Minecart with Note Block",
   "item.sound_track.jukebox_minecart":"Minecart with Jukebox",
+  "item.sound_track.phonos_speaker_minecart":"Minecart with Loudspeaker",
   "entity.sound_track.note_block_minecart":"Minecart with Note Block",
-  "entity.sound_track.jukebox_minecart":"Minecart with Jukebox"
+  "entity.sound_track.jukebox_minecart":"Minecart with Jukebox",
+  "entity.sound_track.phonos_speaker_minecart":"Minecart with Loudspeaker"
 }
