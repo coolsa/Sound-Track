@@ -23,4 +23,4 @@ Sound-Track adds two minecarts, implementing their block relatives:
 
 ## License
 
-This mod uses the GNU GPL 3.0 license.
+This mod uses the GNU LGPL 3.0 license.

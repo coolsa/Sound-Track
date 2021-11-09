@@ -34,6 +34,12 @@ dependencies {
 		}
 	}
 	
+	compileOnly("com.github.sydist:stormfest"){
+		version {
+			branch = "${project.stormfest_branch}"
+		}
+	}
+	
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 }

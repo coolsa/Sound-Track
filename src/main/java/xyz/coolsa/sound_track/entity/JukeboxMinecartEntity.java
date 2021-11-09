@@ -114,6 +114,10 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 				if (!player.isCreative()) { // if they are not in creative
 					player.getStackInHand(hand).decrement(1); // decrement the records held by 1, in line with vanilla.
 				}
+				// if we have stormfest, lets do some compat stuff here. THUNDER! oo ah oo ah ah oo ah ah oo
+				if(SoundTrack.stormfest.isLoaded() && SoundTrack.stormfest.isChargedMusicDisc(this.record.getItem())) {
+					this.record = SoundTrack.stormfest.handleChargedMusicDisc((ServerWorld) player.world);
+				}
 				player.incrementStat(Stats.PLAY_RECORD); // increment their stat.
 				this.playRecord(); // actually play the record
 				result = ActionResult.CONSUME; // its a consume action.
@@ -129,6 +133,7 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 				this.playRecord(); // and update the record playback.
 			}
 		}
+//		SoundTrack.LOG.info("asdf");
 		return result; // return the action result
 	}
 

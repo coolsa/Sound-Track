@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.registry.Registry;
 import xyz.coolsa.sound_track.compat.PhonosCompatibility;
+import xyz.coolsa.sound_track.compat.StormfestCompatibility;
 import xyz.coolsa.sound_track.compat.phonos.PhonosCompatConstants;
 
 public class SoundTrack implements ModInitializer {
@@ -14,9 +15,11 @@ public class SoundTrack implements ModInitializer {
 	public static PhonosCompatibility phonos;
 	public static PhonosCompatConstants phonosConstants;
 
+	public static StormfestCompatibility stormfest;
 	@Override
 	public void onInitialize() {
 		phonos = new PhonosCompatibility();
+		stormfest = new StormfestCompatibility();
 		// register the items and the entities.
 		Registry.register(Registry.ITEM, SoundTrackConstants.JUKEBOX_MINECART_ITEM_ID,
 				SoundTrackConstants.JUKEBOX_MINECART_ITEM);
