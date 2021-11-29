@@ -40,9 +40,9 @@ public class DetectorRailMixin {
 		if (!list.isEmpty() && !list.get(0).getRecord().isEmpty()) { // if there are actually jukebox minecarts
 			if (list.get(0).getRecord().getItem() instanceof MusicDiscItem) { // read the power level of vanilla disc
 				info.setReturnValue(((MusicDiscItem) list.get(0).getRecord().getItem()).getComparatorOutput());
-			} else if (SoundTrack.phonos.isLoaded()// read power level of phonos disc.
-					&& SoundTrack.phonos.isCustomMusicDisc(list.get(0).getRecord().getItem())) {
-				info.setReturnValue(list.get(0).getRecord().getOrCreateSubNbt("MusicData").getInt("ComparatorSignal"));
+//			} else if (SoundTrack.phonos.isLoaded()// read power level of phonos disc.
+//					&& SoundTrack.phonos.isCustomMusicDisc(list.get(0).getRecord().getItem())) {
+//				info.setReturnValue(list.get(0).getRecord().getOrCreateSubNbt("MusicData").getInt("ComparatorSignal"));
 			}
 		}
 	}

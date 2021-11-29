@@ -5,8 +5,8 @@ import net.minecraft.client.render.entity.model.EntityModelLayers;
 import xyz.coolsa.sound_track.SoundTrack;
 import xyz.coolsa.sound_track.SoundTrackConstants;
 import xyz.coolsa.sound_track.client.networking.ClientPacketHandler;
-import xyz.coolsa.sound_track.compat.phonos.PhonosSpeakerMinecartEntity;
-import xyz.coolsa.sound_track.compat.phonos.client.PhonosCompatClient;
+//import xyz.coolsa.sound_track.compat.phonos.PhonosSpeakerMinecartEntity;
+//import xyz.coolsa.sound_track.compat.phonos.client.PhonosCompatClient;
 import xyz.coolsa.sound_track.entity.JukeboxMinecartEntity;
 import xyz.coolsa.sound_track.entity.NoteBlockMinecartEntity;
 import net.fabricmc.api.ClientModInitializer;
@@ -15,7 +15,7 @@ import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 public class SoundTrackClient implements ClientModInitializer {
 	@SuppressWarnings("unused")
 	private static ClientPacketHandler handler;
-	private static PhonosCompatClient phonosClient;
+//	private static PhonosCompatClient phonosClient;
 	@Override
 	public void onInitializeClient() {
 		EntityRendererRegistry.INSTANCE.register(SoundTrackConstants.JUKEBOX_MINECART_ENTITY,
@@ -25,8 +25,8 @@ public class SoundTrackClient implements ClientModInitializer {
 				(context) -> new MinecartEntityRenderer<NoteBlockMinecartEntity>(context,
 						EntityModelLayers.FURNACE_MINECART));
 		handler = new ClientPacketHandler();
-		if (SoundTrack.phonos.supportsEntities()) {
-			this.phonosClient = new PhonosCompatClient();
-		}
+//		if (SoundTrack.phonos.supportsEntities()) {
+//			this.phonosClient = new PhonosCompatClient();
+//		}
 	}
 }

@@ -7,11 +7,12 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-sourceControl {
-    gitRepository('https://github.com/coolsa/phonos.git') {
-        producesModule('io.github.foundationgames:phonos')
-    }
-    gitRepository('https://github.com/sydist/stormfest.git') {
-        producesModule('com.github.sydist:stormfest')
-    }
-}
+
+//sourceControl {
+//    gitRepository('https://github.com/coolsa/phonos.git') {
+//        producesModule('io.github.foundationgames:phonos')
+//    }
+//    gitRepository('https://github.com/sydist/stormfest.git') {
+//        producesModule('com.github.sydist:stormfest')
+//    }
+//}

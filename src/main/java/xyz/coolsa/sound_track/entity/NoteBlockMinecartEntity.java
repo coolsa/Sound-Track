@@ -27,6 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import xyz.coolsa.sound_track.SoundTrack;
 import xyz.coolsa.sound_track.SoundTrackConstants;
 
 public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
@@ -168,11 +169,16 @@ public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
 		this.powered = powered;
 	}
 
+	public void test() {
+		SoundTrack.LOG.info("TESTING DCEVM on 1.17");
+	}
+	
 	@Override
 	protected void moveOnRail(BlockPos pos, BlockState state) {
 		if (!state.isOf(Blocks.ACTIVATOR_RAIL) || !pos.equals(this.pos))
 			this.powered = false;
 		this.pos = pos;
+//		test();
 		super.moveOnRail(pos, state);
 	}
 

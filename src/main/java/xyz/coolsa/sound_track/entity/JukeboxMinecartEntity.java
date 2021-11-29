@@ -106,8 +106,8 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 		ActionResult result = ActionResult.SUCCESS;
 		if (!player.world.isClient) {
 			// if we have a normal music disc, or it is a phonos custom music disc,
-			if ((player.getStackInHand(hand).getItem() instanceof MusicDiscItem || (SoundTrack.phonos.isLoaded()
-					&& SoundTrack.phonos.isCustomMusicDisc(player.getStackInHand(hand).getItem())))
+			if ((player.getStackInHand(hand).getItem() instanceof MusicDiscItem ) //TODO: get rid of bracket when phonos is updated.
+//					|| (SoundTrack.phonos.isLoaded() && SoundTrack.phonos.isCustomMusicDisc(player.getStackInHand(hand).getItem())))
 					&& this.record.isEmpty()) {
 				this.record = player.getStackInHand(hand).copy(); // copy the players record
 				this.record.setCount(1); // set the count to 1 (only play 1 record)
@@ -115,9 +115,10 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 					player.getStackInHand(hand).decrement(1); // decrement the records held by 1, in line with vanilla.
 				}
 				// if we have stormfest, lets do some compat stuff here. THUNDER! oo ah oo ah ah oo ah ah oo
-				if(SoundTrack.stormfest.isLoaded() && SoundTrack.stormfest.isChargedMusicDisc(this.record.getItem())) {
-					this.record = SoundTrack.stormfest.handleChargedMusicDisc((ServerWorld) player.world);
-				}
+				//TODO: uncomment when stormfest is updated.
+//				if(SoundTrack.stormfest.isLoaded() && SoundTrack.stormfest.isChargedMusicDisc(this.record.getItem())) {
+//					this.record = SoundTrack.stormfest.handleChargedMusicDisc((ServerWorld) player.world);
+//				}
 				player.incrementStat(Stats.PLAY_RECORD); // increment their stat.
 				this.playRecord(); // actually play the record
 				result = ActionResult.CONSUME; // its a consume action.
