@@ -86,18 +86,18 @@ public class ClientPacketHandler {
 						entity); // create a new sound instance tracking the jukebox minecart
 				subtitle = recordItem.getDescription(); // and read the description of the music disc.
 				// otherwise
-//			} else if (SoundTrack.phonos.isLoaded() && SoundTrack.phonos.isCustomMusicDisc(record.getItem())) {
-//				// if the record is a CustomMusicDiscItem from Phonos, read the sound event.
-//				SoundEvent event = Registry.SOUND_EVENT
-//						.get(Identifier.tryParse(record.getOrCreateSubNbt("MusicData").getString("SoundId")));
-//				if (event != null) // if the event exists, create an instance.
-//					instance = new EntityTrackingSoundInstance(event, SoundCategory.RECORDS, 4.0f, 1.0f, entity);
-//				try { // also lets try to read the subtitle from the item
-//					subtitle = instance.getSoundSet(MinecraftClient.getInstance().getSoundManager()).getSubtitle();
-//					if(subtitle == null) throw new Exception(); // fail if subtitle is null
-//				} catch (Exception e) { // if it fails, lets just make it a "custom music disc"
-//					subtitle = new TranslatableText("item.phonos.custom_music_disc");
-//				}
+			} else if (SoundTrack.phonos.isLoaded() && SoundTrack.phonos.isCustomMusicDisc(record.getItem())) {
+				// if the record is a CustomMusicDiscItem from Phonos, read the sound event.
+				SoundEvent event = Registry.SOUND_EVENT
+						.get(Identifier.tryParse(record.getOrCreateSubNbt("MusicData").getString("SoundId")));
+				if (event != null) // if the event exists, create an instance.
+					instance = new EntityTrackingSoundInstance(event, SoundCategory.RECORDS, 4.0f, 1.0f, entity);
+				try { // also lets try to read the subtitle from the item
+					subtitle = instance.getSoundSet(MinecraftClient.getInstance().getSoundManager()).getSubtitle();
+					if(subtitle == null) throw new Exception(); // fail if subtitle is null
+				} catch (Exception e) { // if it fails, lets just make it a "custom music disc"
+					subtitle = new TranslatableText("item.phonos.custom_music_disc");
+				}
 			}
 			if (subtitle != null) // if there exists a subtitle, lets display the "now playing" subtitle.
 				MinecraftClient.getInstance().inGameHud

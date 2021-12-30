@@ -80,7 +80,6 @@ public class SoundTrackMinecartItem extends Item {
 		super(settings);
 		this.minecartType = minecartType;
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

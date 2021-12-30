@@ -3,9 +3,7 @@
 	"minVersion": "0.8",
 	"package": "xyz.coolsa.sound_track.mixin",
 	"compatibilityLevel": "JAVA_17",
-	"mixins": [
-		"DetectorRailMixin"
-	],
+	"mixins": [],
 	"client": [],
 	"injectors": {
 		"defaultRequire": 1
