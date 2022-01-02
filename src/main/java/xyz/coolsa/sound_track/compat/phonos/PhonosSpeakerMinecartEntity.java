@@ -35,12 +35,12 @@ public class PhonosSpeakerMinecartEntity extends AbstractMinecartEntity implemen
 
 	public PhonosSpeakerMinecartEntity(EntityType<? extends PhonosSpeakerMinecartEntity> type, World world) {
 		super(type, world);
-		this.channelUpdate(this.channel);
+//		this.channelUpdate(this.channel);
 	}
 
 	public PhonosSpeakerMinecartEntity(World world, double x, double y, double z) {
 		super(SoundTrack.phonosConstants.PHONOS_SPEAKER_MINECART_ENTITY, world, x, y, z);
-		this.channelUpdate(this.channel);
+//		this.channelUpdate(this.channel);
 	}
 
 	@Override
