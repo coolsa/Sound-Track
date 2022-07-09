@@ -1,0 +1,4 @@
+accessWidener v2 named
+
+# We need to be able to access this to create our own minecart entities.
+transitive-accessible method net/minecraft/entity/vehicle/AbstractMinecartEntity getItem ()Lnet/minecraft/item/Item;

@@ -17,6 +17,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -27,6 +28,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import xyz.coolsa.sound_track.SoundTrack;
+import xyz.coolsa.sound_track.SoundTrackConstants;
+import xyz.coolsa.sound_track.compat.PhonosCompatibility;
 
 public class PhonosSpeakerMinecartEntity extends AbstractMinecartEntity implements SoundPlayEntityReceivable {
 
@@ -48,18 +51,15 @@ public class PhonosSpeakerMinecartEntity extends AbstractMinecartEntity implemen
 		// We return the chest type, because thats the weight i think it should have.
 		return Type.CHEST;
 	}
+	
+    @Override
+    public Item getItem() {
+        return SoundTrack.phonosConstants.PHONOS_SPEAKER_MINECART_ITEM;
+    }
 
 	@Override
 	public ItemStack getPickBlockStack() {
 		return new ItemStack(SoundTrack.phonosConstants.PHONOS_SPEAKER_MINECART_ITEM);
-	}
-
-	@Override
-	public void dropItems(DamageSource damageSource) {
-		super.dropItems(damageSource);
-		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-			this.dropItem(PhonosBlocks.LOUDSPEAKER);
-		}
 	}
 
 	@Override

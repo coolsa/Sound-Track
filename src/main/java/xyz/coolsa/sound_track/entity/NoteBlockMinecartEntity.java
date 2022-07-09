@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -51,18 +52,15 @@ public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
 		// We return the chest type, because thats the weight i think it should have.
 		return Type.CHEST;
 	}
-
+	
+	@Override
+	public Item getItem() {
+        return SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM;
+    }
+    
 	@Override
 	public ItemStack getPickBlockStack() {
 		return new ItemStack(SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM);
-	}
-
-	@Override
-	public void dropItems(DamageSource damageSource) {
-		super.dropItems(damageSource);
-		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-			this.dropItem(Blocks.NOTE_BLOCK);
-		}
 	}
 
 	@Override
@@ -133,7 +131,7 @@ public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
 		this.setDamageWobbleTicks(10);
 		this.scheduleVelocityUpdate();
 		this.setDamageWobbleStrength(this.getDamageWobbleStrength() + amount * 10.0f);
-		this.emitGameEvent(GameEvent.ENTITY_DAMAGED, source.getAttacker());
+		this.emitGameEvent(GameEvent.ENTITY_DAMAGE, source.getAttacker());
 		if (this.getDamageWobbleStrength() > 40.0f) {
 			this.removeAllPassengers();
 			if (!source.isSourceCreativePlayer() || this.hasCustomName()) {
@@ -158,7 +156,7 @@ public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
 		buf.writeInt(note);
 //		buf.writeItemStack(this.record);
 		for (ServerPlayerEntity players : PlayerLookup.around((ServerWorld) world, this.getBlockPos(), 128))
-			ServerPlayNetworking.send(players, SoundTrackConstants.NOTE_BLOCK_MINECART_PLAY, buf);
+			ServerPlayNetworking.send(players, SoundTrackConstants.NOTE_BLOCK_ENTITY_PLAY, buf);
 	}
 
 	@Override
@@ -172,7 +170,7 @@ public class NoteBlockMinecartEntity extends AbstractMinecartEntity {
 	public void test() {
 		SoundTrack.LOG.info("TESTING DCEVM on 1.17");
 	}
-	
+
 	@Override
 	protected void moveOnRail(BlockPos pos, BlockState state) {
 		if (!state.isOf(Blocks.ACTIVATOR_RAIL) || !pos.equals(this.pos))

@@ -17,9 +17,9 @@ public class SoundTrackConstants {
 	 */
 	public static final String MOD_NAME = "sound_track";
 	/**
-	 * Jukebox minecart packet identifier.
+	 * Jukebox entity packet identifier.
 	 */
-	public static final Identifier JUKEBOX_MINECART_PLAY = new Identifier(MOD_NAME, "jukebox_minecart_play");
+	public static final Identifier JUKEBOX_ENTITY_PLAY = new Identifier(MOD_NAME, "jukebox_entity_play");
 	/**
 	 * The ID of the jukebox minecart item.
 	 */
@@ -44,7 +44,7 @@ public class SoundTrackConstants {
 	/**
 	 * Note block minecart packet identifier.
 	 */
-	public static final Identifier NOTE_BLOCK_MINECART_PLAY = new Identifier(MOD_NAME, "note_block_minecart_play");
+	public static final Identifier NOTE_BLOCK_ENTITY_PLAY = new Identifier(MOD_NAME, "note_block_entity_play");
 	/**
 	 * The ID of the note block minecart item.
 	 */

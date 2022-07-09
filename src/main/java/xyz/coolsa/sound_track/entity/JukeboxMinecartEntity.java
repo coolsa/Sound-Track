@@ -10,6 +10,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.AbstractMinecartEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.MusicDiscItem;
 import net.minecraft.nbt.NbtCompound;
@@ -45,7 +46,13 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 	public Type getMinecartType() {
 		// We return the chest type, because thats the weight i think it should have.
 		return Type.CHEST;
-	}
+    }
+    
+    @Override
+    public Item getItem() {
+        return SoundTrackConstants.JUKEBOX_MINECART_ITEM;
+    }
+    
 
 	@Override
 	public ItemStack getPickBlockStack() {
@@ -56,7 +63,6 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 	public void dropItems(DamageSource damageSource) {
 		super.dropItems(damageSource);
 		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
-			this.dropItem(Blocks.JUKEBOX);
 			this.dropStack(this.record);
 		}
 	}
@@ -144,7 +150,7 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 		buf.writeLong(0); // TODO: add seeking to the playback.
 		// loop through all of the players and send them the packet for playback.
 		for (ServerPlayerEntity players : PlayerLookup.around((ServerWorld) world, this.getBlockPos(), 128))
-			ServerPlayNetworking.send(players, SoundTrackConstants.JUKEBOX_MINECART_PLAY, buf);
+			ServerPlayNetworking.send(players, SoundTrackConstants.JUKEBOX_ENTITY_PLAY, buf);
 	}
 
 	public ItemStack getRecord() {

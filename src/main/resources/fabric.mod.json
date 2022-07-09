@@ -29,11 +29,11 @@
   "mixins": [
     "sound_track.mixins.json"
   ],
-
+	"accessWidener": "sound_track.accesswidener",
   "depends": {
     "fabricloader": ">=0.12.0",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": ">=17"
   },
   "suggests": {
