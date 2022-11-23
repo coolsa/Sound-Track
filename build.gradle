@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.12-SNAPSHOT'
+	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -37,12 +37,13 @@ dependencies {
 			branch = "${project.phonos_branch}"
 		}
 	}
-	
-	compileOnly("com.github.sydist:stormfest"){
-		version {
-			branch = "${project.stormfest_branch}"
-		}
-	}
+
+// Some stuff changed with stormfest, so I worked around it.
+//	compileOnly("io.github.sydist:stormfest"){
+//		version {
+//			branch = "${project.stormfest_branch}"
+//		}
+//	}
 
 	
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
