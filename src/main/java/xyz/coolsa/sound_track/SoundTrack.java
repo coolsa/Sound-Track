@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.object.builder.v1.entity.MinecartComparatorLogicRegistry;
+import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 //import xyz.coolsa.sound_track.compat.PhonosCompatibility;
@@ -32,6 +34,10 @@ public class SoundTrack implements ModInitializer {
 				SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM);
 		Registry.register(Registries.ENTITY_TYPE, SoundTrackConstants.NOTE_BLOCK_MINECART_ENTITY_ID,
 				SoundTrackConstants.NOTE_BLOCK_MINECART_ENTITY);
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(SoundTrackConstants.JUKEBOX_MINECART_ITEM));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.add(SoundTrackConstants.JUKEBOX_MINECART_ITEM));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> entries.add(SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM));
+		ItemGroupEvents.modifyEntriesEvent(ItemGroups.REDSTONE).register(entries -> entries.add(SoundTrackConstants.NOTE_BLOCK_MINECART_ITEM));
 		MinecartComparatorLogicRegistry.register(SoundTrackConstants.JUKEBOX_MINECART_ENTITY, new JukeboxMinecartType());
 //		if (phonos.supportsEntities()) {
 //			SoundTrack.phonosConstants = new PhonosCompatConstants();
