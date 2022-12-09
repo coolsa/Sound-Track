@@ -3,7 +3,6 @@ package xyz.coolsa.sound_track;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 //import xyz.coolsa.sound_track.entity.JukeboxBoatEntity;
 import xyz.coolsa.sound_track.entity.JukeboxMinecartEntity;
@@ -33,7 +32,7 @@ public class SoundTrackConstants {
      * The actual jukebox minecart item.
      */
     public static final Item JUKEBOX_MINECART_ITEM = new SoundTrackMinecartItem(new JukeboxMinecartType(),
-            new Item.Settings().maxCount(1).group(ItemGroup.TRANSPORTATION));
+            new Item.Settings().maxCount(1));
     /**
      * The actual jukebox minecart entity.
      */
@@ -77,7 +76,7 @@ public class SoundTrackConstants {
      * The actual note block minecart item.
      */
     public static final Item NOTE_BLOCK_MINECART_ITEM = new SoundTrackMinecartItem(new NoteBlockMinecartType(),
-            new Item.Settings().maxCount(1).group(ItemGroup.TRANSPORTATION));
+            new Item.Settings().maxCount(1));
     /**
      * The actual noteblock minecart entity.
      */

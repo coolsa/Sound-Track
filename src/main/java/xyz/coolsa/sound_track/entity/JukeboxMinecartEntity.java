@@ -121,9 +121,9 @@ public class JukeboxMinecartEntity extends AbstractMinecartEntity implements Cle
 					player.getStackInHand(hand).decrement(1); // decrement the records held by 1, in line with vanilla.
 				}
 				// if we have stormfest, lets do some compat stuff here. THUNDER! ah ooh ah ah ooh ahh
-				if(SoundTrack.stormfest.isLoaded() && SoundTrack.stormfest.isChargedMusicDisc(this.record.getItem())) {
-					this.record = SoundTrack.stormfest.handleChargedMusicDisc((ServerWorld) player.world);
-				}
+//				if(SoundTrack.stormfest.isLoaded() && SoundTrack.stormfest.isChargedMusicDisc(this.record.getItem())) {
+//					this.record = SoundTrack.stormfest.handleChargedMusicDisc((ServerWorld) player.world);
+//				}
 				player.incrementStat(Stats.PLAY_RECORD); // increment their stat.
 				this.playRecord(); // actually play the record
 				result = ActionResult.CONSUME; // its a consume action.
